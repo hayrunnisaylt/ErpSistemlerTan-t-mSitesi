@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: light;
+  --brand-bg: #eeede9;
+  --brand-ink: #1b1b1b;
+}
+
+body {
+  background-color: #eeede9;
+  color: #1b1b1b;
+}
+
+/* Subtle architectural grid background tuned for #eeede9 */
+.bg-grid-pattern {
+  background-image: linear-gradient(
+      to right,
+      rgba(27, 27, 27, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(27, 27, 27, 0.045) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+}
+
+/* Laser scan sweep animation for AI Invoice Demo */
+@keyframes laser-scan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 98%;
+    opacity: 0;
+  }
+}
+
+.animate-laser-scan {
+  animation: laser-scan 1.45s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+/* Modern Accessible Accordion using native <details> & ::details-content */
+.faq-accordion details summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-accordion details summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion details::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+
+.faq-accordion details:not([open])::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq-accordion details::details-content {
+    transition: block-size, content-visibility, display;
+    transition-duration: 0.28s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+
+  .faq-accordion details summary .faq-chevron {
+    transition: rotate 0.22s ease;
+  }
+}
+
+.faq-accordion details[open] summary .faq-chevron {
+  rotate: 180deg;
+}
+
+/* Accessible focus indicators */
+:focus-visible {
+  outline: 2px solid rgb(5 150 105);
+  outline-offset: 2px;
+}
+
+/* Non-intrusive form validation styling (only after user interaction) */
+.nova-input:user-invalid {
+  border-color: rgb(225 29 72 / 0.75);
+}
+
+.nova-input {
+  font-size: max(1rem, 1em);
+  min-height: 48px;
+}
