@@ -2,9 +2,11 @@
 
 import { useRef, useState } from "react";
 import {
+  AlertCircle,
   CheckCircle2,
   ChevronDown,
   Clock,
+  Loader2,
   Mail,
   MapPin,
   MessageCircle,
@@ -34,9 +36,12 @@ export function FaqAndContactSection({
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // Honeypot spam koruması
   const [errors, setErrors] = useState<{ fullName?: string; phone?: string }>(
     {}
   );
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -55,21 +60,10 @@ export function FaqAndContactSection({
       : undefined;
   };
 
-  const buildFormWhatsAppLink = () => {
-    const text = [
-      `Merhaba ${siteConfig.brandName}! Web sitenizden canlı demo talebi gönderiyorum.`,
-      `• Ad Soyad: ${fullName.trim() || "-"}`,
-      `• Sektör: ${sector}`,
-      `• Telefon: ${phone.trim() || "-"}`,
-      message.trim() ? `• Not: ${message.trim()}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
-    return buildWhatsAppUrl(text);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
+
     const nameErr = validateField("fullName", fullName);
     const phoneErr = validateField("phone", phone);
 
@@ -81,7 +75,42 @@ export function FaqAndContactSection({
     }
 
     setErrors({});
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: fullName.trim(),
+          sector,
+          phone: phone.trim(),
+          message: message.trim(),
+          website,
+        }),
+      });
+
+      const result = (await response.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+
+      if (!response.ok || !result.ok) {
+        setSubmitError(
+          result.error ||
+            "Talebiniz gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Bağlantı hatası oluştu. Lütfen internet bağlantınızı kontrol edip tekrar deneyin."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,7 +174,7 @@ export function FaqAndContactSection({
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-            {/* Left: WhatsApp Quick Contact Card */}
+            {/* Left: Quick Contact Info & WhatsApp Card */}
             <div className="space-y-6 lg:col-span-5">
               <div>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
@@ -159,8 +188,9 @@ export function FaqAndContactSection({
                   İşletmenizi Birlikte Dijitalleştirelim
                 </h2>
                 <p className="mt-3 text-base leading-relaxed text-[#1b1b1b]/70">
-                  Formu doldurun veya doğrudan WhatsApp&apos;tan yazın; aynı gün
-                  içinde sektörünüze özel canlı ekran sunumunuzu planlayalım.
+                  Formu doldurun, talebiniz anında e-posta ile ekibimize
+                  ulaşsın; aynı gün içinde sektörünüze özel canlı ekran
+                  sunumunuzu planlayalım.
                 </p>
               </div>
 
@@ -180,9 +210,8 @@ export function FaqAndContactSection({
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-stone-300">
-                  Form doldurmakla vakit kaybetmek istemiyorsanız tek tıkla
-                  WhatsApp hattımıza yazabilir, örnek ekran videolarını anında
-                  isteyebilirsiniz.
+                  Dilerseniz tek tıkla WhatsApp hattımızdan da bize ulaşabilir,
+                  örnek ekran videolarını anında isteyebilirsiniz.
                 </p>
                 <a
                   href={buildWhatsAppUrl()}
@@ -228,7 +257,7 @@ export function FaqAndContactSection({
               </div>
             </div>
 
-            {/* Right: Demo / Quote Request Form */}
+            {/* Right: Demo / Quote Request Form (Email API) */}
             <div className="rounded-3xl border border-[#1b1b1b]/12 bg-white/90 p-6 shadow-xl shadow-[#1b1b1b]/5 sm:p-8 lg:col-span-7">
               <h3
                 id="demo-form-title"
@@ -237,8 +266,8 @@ export function FaqAndContactSection({
                 Demo &amp; Teklif Talep Formu
               </h3>
               <p className="mt-1 text-sm text-[#1b1b1b]/65">
-                Bilgilerinizi bırakın; isterseniz tek tıkla WhatsApp üzerinden
-                de iletin.
+                Bilgilerinizi bırakın; talebiniz anında ekibimize iletilsin ve
+                sizi arayalım.
               </p>
 
               {submitted ? (
@@ -250,28 +279,16 @@ export function FaqAndContactSection({
                   <div className="flex items-center gap-2.5 text-emerald-800">
                     <CheckCircle2 className="h-6 w-6" aria-hidden="true" />
                     <p className="text-lg font-bold text-[#1b1b1b]">
-                      Talebiniz Hazır, {fullName}!
+                      Talebiniz Bize Ulaştı, {fullName}!
                     </p>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-[#1b1b1b]/80">
-                    <strong>{sector}</strong> sektörü için demo talebiniz
-                    alındı. Daha hızlı dönüş almak için aşağıdaki butonla
-                    hazırlanan mesajı doğrudan WhatsApp hattımıza
-                    gönderebilirsiniz.
+                    <strong>{sector}</strong> sektörü için canlı demo talebiniz
+                    ekibimize e-posta olarak iletildi. En kısa sürede{" "}
+                    <strong>{phone}</strong> numarasından sizinle iletişime
+                    geçeceğiz.
                   </p>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    <a
-                      href={buildFormWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#1b1b1b] px-5 py-3 text-sm font-bold text-white transition-all hover:bg-emerald-700"
-                    >
-                      <MessageCircle
-                        className="h-4 w-4 text-emerald-400"
-                        aria-hidden="true"
-                      />
-                      <span>WhatsApp ile Hemen Gönder</span>
-                    </a>
+                  <div className="mt-5">
                     <button
                       type="button"
                       onClick={() => {
@@ -279,8 +296,9 @@ export function FaqAndContactSection({
                         setFullName("");
                         setPhone("");
                         setMessage("");
+                        setSubmitError(null);
                       }}
-                      className="rounded-2xl border border-[#1b1b1b]/15 bg-white px-4 py-3 text-sm font-medium text-[#1b1b1b] hover:bg-[#eeede9]"
+                      className="rounded-2xl border border-[#1b1b1b]/15 bg-white px-4 py-3 text-sm font-semibold text-[#1b1b1b] transition-colors hover:bg-[#eeede9]"
                     >
                       Yeni Talep Oluştur
                     </button>
@@ -288,11 +306,27 @@ export function FaqAndContactSection({
                 </div>
               ) : (
                 <form
+                  action="/api/contact"
+                  method="POST"
                   onSubmit={handleSubmit}
                   aria-labelledby="demo-form-title"
                   noValidate
                   className="mt-6 space-y-5"
                 >
+                  {/* Invisible Honeypot Field for Spam Protection */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="demo-website">Website</label>
+                    <input
+                      id="demo-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
+
                   {/* Full Name */}
                   <div className="flex flex-col gap-1.5">
                     <label
@@ -316,7 +350,10 @@ export function FaqAndContactSection({
                       onChange={(e) => {
                         setFullName(e.target.value);
                         if (errors.fullName) {
-                          setErrors((prev) => ({ ...prev, fullName: undefined }));
+                          setErrors((prev) => ({
+                            ...prev,
+                            fullName: undefined,
+                          }));
                         }
                       }}
                       onBlur={(e) => {
@@ -407,7 +444,9 @@ export function FaqAndContactSection({
                         }
                       }}
                       aria-invalid={Boolean(errors.phone)}
-                      aria-describedby={errors.phone ? "phone-error" : "phone-help"}
+                      aria-describedby={
+                        errors.phone ? "phone-error" : "phone-help"
+                      }
                       placeholder="05XX XXX XX XX"
                       className="nova-input w-full rounded-2xl border border-[#1b1b1b]/20 bg-[#eeede9]/50 px-4 py-3 text-[#1b1b1b] placeholder:text-[#1b1b1b]/45 transition-colors focus:border-emerald-700 focus:bg-white"
                     />
@@ -445,28 +484,42 @@ export function FaqAndContactSection({
                     />
                   </div>
 
-                  {/* Submit Buttons */}
-                  <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-                    <button
-                      type="submit"
-                      className="inline-flex min-h-[50px] flex-1 items-center justify-center gap-2 rounded-2xl bg-[#1b1b1b] px-6 py-3.5 text-sm font-bold text-[#eeede9] shadow-lg shadow-[#1b1b1b]/15 transition-all hover:bg-emerald-700 hover:text-white"
+                  {/* Server Error Alert */}
+                  {submitError && (
+                    <div
+                      role="alert"
+                      className="flex items-start gap-2.5 rounded-2xl border border-rose-600/25 bg-rose-600/10 px-4 py-3 text-sm text-rose-800"
                     >
-                      <Send className="h-4 w-4" aria-hidden="true" />
-                      <span>Ücretsiz Canlı Demo Talep Et</span>
-                    </button>
-
-                    <a
-                      href={buildFormWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-2xl border border-[#1b1b1b]/15 bg-[#eeede9]/70 px-5 py-3.5 text-sm font-semibold text-[#1b1b1b] transition-colors hover:border-emerald-700/40 hover:bg-emerald-600/10"
-                    >
-                      <MessageCircle
-                        className="h-4 w-4 text-emerald-700"
+                      <AlertCircle
+                        className="mt-0.5 h-4 w-4 shrink-0 text-rose-600"
                         aria-hidden="true"
                       />
-                      <span>Direkt WhatsApp</span>
-                    </a>
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-2xl bg-[#1b1b1b] px-6 py-3.5 text-sm font-bold text-[#eeede9] shadow-lg shadow-[#1b1b1b]/15 transition-all hover:bg-emerald-700 hover:text-white disabled:cursor-wait disabled:opacity-75"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2
+                            className="h-4 w-4 animate-spin"
+                            aria-hidden="true"
+                          />
+                          <span>Talebiniz Gönderiliyor...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4" aria-hidden="true" />
+                          <span>Ücretsiz Canlı Demo Talep Et</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </form>
               )}
