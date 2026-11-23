@@ -698,11 +698,11 @@ export function PortfolioShowcase() {
           role="tabpanel"
           id={`panel-${activeItem.id}`}
           aria-labelledby={`tab-${activeItem.id}`}
-          className={`relative mt-8 overflow-hidden rounded-3xl border border-[#1b1b1b]/12 bg-gradient-to-br ${styles.glow} p-5 shadow-xl shadow-[#1b1b1b]/5 sm:p-8`}
+          className={`relative mt-8 overflow-clip rounded-3xl border border-[#1b1b1b]/12 bg-gradient-to-br ${styles.glow} p-5 shadow-xl shadow-[#1b1b1b]/5 sm:p-8`}
         >
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
             {/* Left Info Column */}
-            <div className="space-y-6 lg:col-span-5">
+            <div className="space-y-5 lg:col-span-5">
               <div>
                 <span
                   className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${styles.badge}`}
@@ -715,24 +715,6 @@ export function PortfolioShowcase() {
                 <p className="mt-2.5 text-sm leading-relaxed text-[#1b1b1b]/75 sm:text-base">
                   &ldquo;{activeItem.story}&rdquo;
                 </p>
-              </div>
-
-              {/* Metrics Strip */}
-              <div className="grid grid-cols-3 gap-2.5">
-                {activeItem.metrics.map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-2xl border border-[#1b1b1b]/10 bg-[#eeede9]/75 p-3"
-                  >
-                    <p className="font-mono text-lg font-bold text-[#1b1b1b] sm:text-xl">
-                      {m.value}
-                    </p>
-                    <p className="mt-0.5 text-[11px] font-semibold text-[#1b1b1b]/80">
-                      {m.label}
-                    </p>
-                    <p className="text-[10px] text-[#1b1b1b]/55">{m.sub}</p>
-                  </div>
-                ))}
               </div>
 
               {/* Solved Problems */}
@@ -754,7 +736,7 @@ export function PortfolioShowcase() {
               </div>
 
               {/* Key Features */}
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#1b1b1b]/60">
                   Öne Çıkan Modüller
                 </p>
@@ -777,9 +759,54 @@ export function PortfolioShowcase() {
                   </div>
                 ))}
               </div>
+            </div>
 
-              {/* Demo CTA Card */}
-              <div className="flex flex-col gap-2.5 rounded-2xl border border-[#1b1b1b]/15 bg-[#eeede9]/80 p-4 sm:flex-row sm:items-center sm:justify-between">
+            {/* Right Interactive Live UI Mockup + Metrics + Demo CTA Column */}
+            <div className="space-y-4 lg:sticky lg:top-24 lg:col-span-7">
+              <div className="overflow-hidden rounded-3xl border border-white/12 bg-stone-950 shadow-2xl">
+                {/* Simulator Window Topbar */}
+                <div className="flex items-center justify-between border-b border-white/10 bg-stone-900/90 px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+                    <span className="ml-2 font-mono text-[11px] text-stone-400">
+                      {activeItem.shortLabel} • Canlı Önizleme
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-300">
+                    İnteraktif Simülasyon
+                  </span>
+                </div>
+
+                {/* Live Simulator Body */}
+                <div className="p-4 sm:p-5">
+                  {activeItem.id === "toptanci" && <ToptanciSimulator />}
+                  {activeItem.id === "veteriner" && <VeterinerSimulator />}
+                  {activeItem.id === "fizyoterapi" && <FizyoterapiSimulator />}
+                </div>
+              </div>
+
+              {/* Metrics Strip below Simulator */}
+              <div className="grid grid-cols-3 gap-3">
+                {activeItem.metrics.map((m) => (
+                  <div
+                    key={m.label}
+                    className="rounded-2xl border border-[#1b1b1b]/10 bg-[#eeede9]/80 p-3.5"
+                  >
+                    <p className="font-mono text-lg font-bold text-[#1b1b1b] sm:text-xl">
+                      {m.value}
+                    </p>
+                    <p className="mt-0.5 text-xs font-semibold text-[#1b1b1b]/80">
+                      {m.label}
+                    </p>
+                    <p className="text-[11px] text-[#1b1b1b]/55">{m.sub}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Demo CTA Card below Metrics */}
+              <div className="flex flex-col gap-3 rounded-2xl border border-[#1b1b1b]/15 bg-[#eeede9]/90 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-bold text-[#1b1b1b]">
                     Bu sistemi canlı denemek ister misiniz?
@@ -810,33 +837,6 @@ export function PortfolioShowcase() {
                       aria-hidden="true"
                     />
                   </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Interactive Live UI Mockup Column */}
-            <div className="lg:col-span-7">
-              <div className="overflow-hidden rounded-3xl border border-white/12 bg-stone-950 shadow-2xl">
-                {/* Simulator Window Topbar */}
-                <div className="flex items-center justify-between border-b border-white/10 bg-stone-900/90 px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                    <span className="ml-2 font-mono text-[11px] text-stone-400">
-                      {activeItem.shortLabel} • Canlı Önizleme
-                    </span>
-                  </div>
-                  <span className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-300">
-                    İnteraktif Simülasyon
-                  </span>
-                </div>
-
-                {/* Live Simulator Body */}
-                <div className="p-4 sm:p-5">
-                  {activeItem.id === "toptanci" && <ToptanciSimulator />}
-                  {activeItem.id === "veteriner" && <VeterinerSimulator />}
-                  {activeItem.id === "fizyoterapi" && <FizyoterapiSimulator />}
                 </div>
               </div>
             </div>

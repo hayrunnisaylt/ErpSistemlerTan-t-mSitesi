@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -36,9 +29,11 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${plusJakarta.variable} ${jetbrainsMono.variable} scroll-smooth`}
+      className={`${inter.className} ${inter.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-[#eeede9] font-sans text-[#1b1b1b] antialiased selection:bg-emerald-600/20 selection:text-[#1b1b1b]">
+      <body
+        className={`${inter.className} min-h-screen bg-[#eeede9] font-sans text-[#1b1b1b] antialiased selection:bg-emerald-600/20 selection:text-[#1b1b1b]`}
+      >
         {children}
       </body>
     </html>

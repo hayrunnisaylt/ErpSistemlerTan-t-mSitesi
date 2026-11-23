@@ -34,24 +34,28 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#1b1b1b]/10 bg-[#eeede9]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <BrandLogo className="h-12 w-auto" />
+        <div className="flex items-center gap-6">
+          <BrandLogo className="h-12 w-auto" />
 
-        {/* Single semantic navigation landmark */}
-        <nav aria-label="Ana Menü" className="flex items-center gap-2">
-          <ul className="hidden items-center gap-1 lg:flex">
-            {siteConfig.navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-[#1b1b1b]/75 transition-colors duration-200 hover:bg-[#1b1b1b]/5 hover:text-[#1b1b1b]"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Single semantic navigation landmark aligned next to logo */}
+          <nav aria-label="Ana Menü" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {siteConfig.navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-[#1b1b1b]/75 transition-colors duration-200 hover:bg-[#1b1b1b]/5 hover:text-[#1b1b1b]"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
-          <div className="hidden items-center gap-2.5 pl-2 sm:flex">
+        <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2.5 sm:flex">
             <a
               href={buildWhatsAppUrl()}
               target="_blank"
@@ -87,7 +91,7 @@ export function Navbar() {
               <Menu className="h-5 w-5" aria-hidden="true" />
             )}
           </button>
-        </nav>
+        </div>
       </div>
 
       {/* Mobile Dropdown Panel */}

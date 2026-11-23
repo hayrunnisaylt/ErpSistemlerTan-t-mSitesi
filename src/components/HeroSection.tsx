@@ -152,24 +152,6 @@ export function HeroSection() {
 
         {/* Interactive Live Browser Dashboard Mockup */}
         <div className="relative mx-auto mt-14 max-w-5xl">
-          {/* Floating AI Notification Pill */}
-          <div className="animate-float-slow relative z-20 mx-auto mb-4 flex max-w-md items-center gap-3 rounded-2xl border border-emerald-400/30 bg-stone-900/90 px-4 py-3 shadow-2xl shadow-emerald-950/80 backdrop-blur-xl md:absolute md:-right-4 md:-top-7 md:mb-0">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
-              <Sparkles className="h-4 w-4" aria-hidden="true" />
-            </span>
-            <div className="min-w-0 text-left">
-              <p className="text-xs font-semibold text-emerald-300">
-                AI Fatura Tarandı • Gemini 2.5
-              </p>
-              <p className="truncate text-xs text-stone-300">
-                18 Kalem 2.4 Saniyede Stoka İşlendi
-              </p>
-            </div>
-            <span className="ml-auto rounded-full bg-emerald-500/20 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-300">
-              %99.6
-            </span>
-          </div>
-
           {/* Realistic Browser Window */}
           <div className="overflow-hidden rounded-3xl border border-white/12 bg-slate-950/90 shadow-2xl shadow-black/70 ring-1 ring-white/5 backdrop-blur-xl">
             {/* Browser Top Chrome */}
