@@ -83,13 +83,14 @@ export function AiInvoiceDemo() {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/8 blur-[120px]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-            <Sparkles className="h-3.5 w-3.5 text-amber-600" aria-hidden="true" />
-            Canlı AI Deneyim Alanı
-          </span>
+          <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-emerald-700/60" aria-hidden="true" />
+            <span>Canlı AI Deneyim Alanı</span>
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-emerald-700/60" aria-hidden="true" />
+          </div>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#1b1b1b] sm:text-4xl lg:text-5xl">
             Yapay Zeka Fatura Taramayı{" "}
             <span className="text-emerald-700">Şimdi Kendiniz Test Edin</span>

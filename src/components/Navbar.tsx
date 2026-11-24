@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Menu, MessageCircle, Sparkles, X } from "lucide-react";
-import { buildWhatsAppUrl, siteConfig } from "@/lib/site-config";
+import { Mail, Menu, Sparkles, X } from "lucide-react";
+import { siteConfig } from "@/lib/site-config";
 
 interface BrandLogoProps {
   className?: string;
@@ -33,7 +33,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#1b1b1b]/10 bg-[#eeede9]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-18 max-w-[1520px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
         <div className="flex items-center gap-6">
           <BrandLogo className="h-12 w-auto" />
 
@@ -57,16 +57,11 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2.5 sm:flex">
             <a
-              href={buildWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${siteConfig.contact.email}`}
               className="inline-flex items-center gap-1.5 rounded-xl border border-[#1b1b1b]/15 bg-white/70 px-3.5 py-2 text-sm font-medium text-[#1b1b1b] transition-all duration-200 hover:border-emerald-600/40 hover:bg-emerald-600/10 hover:text-emerald-900"
             >
-              <MessageCircle
-                className="h-4 w-4 text-emerald-600"
-                aria-hidden="true"
-              />
-              <span>WhatsApp ile Ulaşın</span>
+              <Mail className="h-4 w-4 text-emerald-700" aria-hidden="true" />
+              <span>E-Posta ile Ulaşın</span>
             </a>
             <a
               href="#iletisim"
@@ -115,17 +110,12 @@ export function Navbar() {
           </ul>
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:hidden">
             <a
-              href={buildWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${siteConfig.contact.email}`}
               onClick={() => setMobileOpen(false)}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#1b1b1b]/15 bg-white/80 px-4 py-3 text-sm font-medium text-[#1b1b1b]"
             >
-              <MessageCircle
-                className="h-4 w-4 text-emerald-600"
-                aria-hidden="true"
-              />
-              WhatsApp ile Ulaşın
+              <Mail className="h-4 w-4 text-emerald-700" aria-hidden="true" />
+              E-Posta ile Ulaşın
             </a>
             <a
               href="#iletisim"

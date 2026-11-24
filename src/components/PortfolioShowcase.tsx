@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   ExternalLink,
   HeartPulse,
+  Mail,
   MessageCircle,
   Package,
   PawPrint,
@@ -21,11 +22,7 @@ import {
   TrendingDown,
   Wallet,
 } from "lucide-react";
-import {
-  buildWhatsAppUrl,
-  siteConfig,
-  type PortfolioItem,
-} from "@/lib/site-config";
+import { siteConfig, type PortfolioItem } from "@/lib/site-config";
 
 const tabIcons = {
   toptanci: Package,
@@ -621,12 +618,14 @@ export function PortfolioShowcase() {
       id="vitrin"
       className="relative scroll-mt-20 border-b border-[#1b1b1b]/10 bg-[#eeede9] py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         {/* Section Heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#1b1b1b]/12 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-            Canlı Sistem Vitrini
-          </span>
+          <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-emerald-700/60" aria-hidden="true" />
+            <span>Canlı Sistem Vitrini</span>
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-emerald-700/60" aria-hidden="true" />
+          </div>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#1b1b1b] sm:text-4xl lg:text-5xl">
             Gerçek İşletmeler İçin Geliştirdiğimiz Sistemleri{" "}
             <span className="text-emerald-700">Canlı İnceleyin</span>
@@ -824,15 +823,13 @@ export function PortfolioShowcase() {
                     <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   </a>
                   <a
-                    href={buildWhatsAppUrl(
-                      `Merhaba ${siteConfig.brandName}, "${activeItem.title}" örneği hakkında canlı demo talep ediyorum.`
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
+                      `${activeItem.title} — Canlı Demo Talebi`
+                    )}`}
                     className="inline-flex items-center justify-center rounded-xl border border-[#1b1b1b]/15 bg-white px-3 py-2.5 text-xs font-medium text-[#1b1b1b] transition-colors hover:bg-emerald-50"
-                    aria-label={`${activeItem.shortLabel} için WhatsApp'tan yaz`}
+                    aria-label={`${activeItem.shortLabel} için e-posta gönder`}
                   >
-                    <MessageCircle
+                    <Mail
                       className="h-4 w-4 text-emerald-700"
                       aria-hidden="true"
                     />

@@ -9,12 +9,9 @@ import {
   Loader2,
   Mail,
   MapPin,
-  MessageCircle,
-  Phone,
   Send,
-  Sparkles,
 } from "lucide-react";
-import { buildWhatsAppUrl, siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
 
 export const sectorOptions = [
   "Toptancı & Gıda / İçecek Dağıtım",
@@ -121,11 +118,13 @@ export function FaqAndContactSection({
         aria-labelledby="faq-heading"
         className="faq-accordion relative scroll-mt-20 border-b border-[#1b1b1b]/10 bg-[#eeede9] py-20 sm:py-28"
       >
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-10">
           <div className="text-center">
-            <span className="inline-flex items-center rounded-full border border-[#1b1b1b]/12 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-              Merak Edilenler
-            </span>
+            <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-emerald-700/60" aria-hidden="true" />
+              <span>Merak Edilenler</span>
+              <span className="h-px w-8 bg-gradient-to-l from-transparent to-emerald-700/60" aria-hidden="true" />
+            </div>
             <h2
               id="faq-heading"
               className="mt-4 text-3xl font-bold tracking-tight text-[#1b1b1b] sm:text-4xl"
@@ -172,15 +171,15 @@ export function FaqAndContactSection({
           className="pointer-events-none absolute -bottom-24 right-0 h-[360px] w-[520px] rounded-full bg-emerald-500/10 blur-[120px]"
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
             {/* Left: Quick Contact Info & WhatsApp Card */}
             <div className="space-y-6 lg:col-span-5">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-                  <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                  Ücretsiz 15 Dk Canlı Demo
-                </span>
+                <div className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
+                  <span className="h-[2px] w-6 rounded-full bg-emerald-700" aria-hidden="true" />
+                  <span>Ücretsiz 15 Dk Canlı Demo</span>
+                </div>
                 <h2
                   id="contact-heading"
                   className="mt-4 text-3xl font-bold tracking-tight text-[#1b1b1b] sm:text-4xl"
@@ -194,53 +193,46 @@ export function FaqAndContactSection({
                 </p>
               </div>
 
-              {/* Direct WhatsApp Card */}
+              {/* Direct Email Card */}
               <div className="rounded-3xl border border-[#1b1b1b]/15 bg-[#1b1b1b] p-6 text-stone-100 shadow-xl">
                 <div className="flex items-center gap-3">
                   <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-stone-950 shadow-lg shadow-emerald-500/25">
-                    <MessageCircle className="h-6 w-6" aria-hidden="true" />
+                    <Mail className="h-6 w-6" aria-hidden="true" />
                   </span>
                   <div>
                     <p className="text-base font-bold text-white">
-                      WhatsApp ile Hızlı İletişim
+                      E-Posta ile Doğrudan Ulaşın
                     </p>
                     <p className="text-xs text-emerald-300">
-                      Ortalama yanıt süresi: 5 dakika
+                      Aynı gün içinde hızlı dönüş
                     </p>
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-stone-300">
-                  Dilerseniz tek tıkla WhatsApp hattımızdan da bize ulaşabilir,
-                  örnek ekran videolarını anında isteyebilirsiniz.
+                  Projeniz, sektörünüz veya canlı demo talebiniz için bize
+                  doğrudan e-posta gönderebilirsiniz.
                 </p>
                 <a
-                  href={buildWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
+                    `${siteConfig.brandName} — Canlı Demo Talebi`
+                  )}`}
                   className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-5 py-3.5 text-sm font-bold text-stone-950 shadow-lg shadow-emerald-500/20 transition-all hover:bg-emerald-400"
                 >
-                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  <span>WhatsApp&apos;tan Şimdi Yaz</span>
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  <span>{siteConfig.contact.email}</span>
                 </a>
               </div>
 
               {/* Direct Contact Info */}
               <div className="space-y-3 rounded-3xl border border-[#1b1b1b]/12 bg-white/80 p-6 text-sm text-[#1b1b1b]/80 shadow-sm">
                 <a
-                  href={`tel:${siteConfig.contact.phoneRaw}`}
-                  className="flex items-center gap-3 font-medium transition-colors hover:text-[#1b1b1b]"
-                >
-                  <Phone
-                    className="h-4 w-4 text-emerald-700"
-                    aria-hidden="true"
-                  />
-                  <span>{siteConfig.contact.phoneDisplay}</span>
-                </a>
-                <a
                   href={`mailto:${siteConfig.contact.email}`}
                   className="flex items-center gap-3 font-medium transition-colors hover:text-[#1b1b1b]"
                 >
-                  <Mail className="h-4 w-4 text-teal-700" aria-hidden="true" />
+                  <Mail
+                    className="h-4 w-4 text-emerald-700"
+                    aria-hidden="true"
+                  />
                   <span>{siteConfig.contact.email}</span>
                 </a>
                 <div className="flex items-center gap-3 text-[#1b1b1b]/70">

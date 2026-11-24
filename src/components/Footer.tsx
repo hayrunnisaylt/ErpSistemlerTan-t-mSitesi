@@ -1,12 +1,12 @@
 import { BrandLogo } from "@/components/Navbar";
-import { buildWhatsAppUrl, siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   const year = 2026;
 
   return (
     <footer className="border-t border-[#1b1b1b]/10 bg-[#eeede9] py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div>
             <BrandLogo className="h-14 w-auto" />
@@ -27,12 +27,10 @@ export function Footer() {
               </a>
             ))}
             <a
-              href={buildWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${siteConfig.contact.email}`}
               className="font-semibold text-emerald-700 transition-colors hover:text-emerald-900"
             >
-              WhatsApp Destek
+              E-Posta ile Ulaşın
             </a>
           </div>
         </div>
@@ -41,9 +39,12 @@ export function Footer() {
           <p>
             © {year} {siteConfig.brandName}. Tüm hakları saklıdır.
           </p>
-          <p>
-            {siteConfig.contact.email} • {siteConfig.contact.phoneDisplay}
-          </p>
+          <a
+            href={`mailto:${siteConfig.contact.email}`}
+            className="transition-colors hover:text-[#1b1b1b]"
+          >
+            {siteConfig.contact.email}
+          </a>
         </div>
       </div>
     </footer>

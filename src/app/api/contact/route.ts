@@ -294,7 +294,7 @@ export async function POST(request: NextRequest) {
       {
         ok: false,
         error:
-          "E-posta servisi henüz yapılandırılmamış. Lütfen daha sonra tekrar deneyin veya telefon/e-posta ile ulaşın.",
+          "E-posta servisi henüz yapılandırılmamış. Lütfen doğrudan ynsoftwaresolution@gmail.com adresinden bize ulaşın.",
       },
       { status: 503 }
     );

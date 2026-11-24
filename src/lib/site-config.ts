@@ -55,14 +55,8 @@ export const siteConfig = {
   heroSubtitle:
     "Toptancılardan veteriner kliniklerine, fizyoterapi merkezlerinden yerel işletmelere kadar; işinize özel kurgulanan, telefonunuzdan tek tıkla yönetilen yapay zeka destekli ERP ve Klinik Yönetim Sistemleri.",
   contact: {
-    phoneDisplay: "+90 532 000 00 00",
-    phoneRaw: "+905320000000",
-    /** Başında + olmadan ülke kodu ile WhatsApp numarası (örn: 905321234567) */
-    whatsappNumber: "905320000000",
-    whatsappDefaultMessage:
-      "Merhaba y&n Software Solutions! İşletmemiz için yapay zeka destekli özel ERP / Klinik sistemi hakkında canlı demo ve bilgi almak istiyorum.",
-    email: "info@ynsoftwaresolutions.com",
-    location: "İstanbul & Tüm Türkiye Uzaktan Kurulum",
+    email: "ynsoftwaresolution@gmail.com",
+    location: "Yalova & Tüm Türkiye",
     workingHours: "Pzt - Cmt: 09:00 - 20:00",
   },
   navLinks: [
@@ -433,10 +427,3 @@ export const siteConfig = {
     },
   ],
 } as const;
-
-export function buildWhatsAppUrl(customMessage?: string): string {
-  const message = customMessage ?? siteConfig.contact.whatsappDefaultMessage;
-  return `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(
-    message
-  )}`;
-}

@@ -2,7 +2,6 @@
 
 import {
   ArrowRight,
-  Building2,
   Clock,
   Hammer,
   Pill,
@@ -29,13 +28,13 @@ interface SectorsSectionProps {
 export function SectorsSection({ onSelectSector }: SectorsSectionProps) {
   return (
     <section className="relative border-b border-[#1b1b1b]/10 bg-[#eeede9] py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#1b1b1b]/12 bg-white/80 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800">
-              <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-              Terzi İşi Sektörel Çözümler
-            </span>
+            <div className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
+              <span className="h-[2px] w-6 rounded-full bg-emerald-700" aria-hidden="true" />
+              <span>Terzi İşi Sektörel Çözümler</span>
+            </div>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#1b1b1b] sm:text-4xl lg:text-5xl">
               Sizin Sektörünüz Hangisi?
             </h2>
@@ -48,7 +47,7 @@ export function SectorsSection({ onSelectSector }: SectorsSectionProps) {
           <div className="inline-flex items-center gap-3 rounded-2xl border border-amber-700/20 bg-white/85 px-4 py-3 text-sm text-[#1b1b1b] shadow-sm">
             <Clock className="h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
             <span>
-              <strong>7 iş gününde</strong> anahtar teslim kurulum
+              <strong>7 iş gününde</strong> teslim
             </span>
           </div>
         </div>

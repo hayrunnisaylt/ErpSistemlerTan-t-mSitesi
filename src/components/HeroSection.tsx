@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   FileSpreadsheet,
   ShieldCheck,
-  Sparkles,
   TrendingUp,
   Wallet,
   Zap,
@@ -95,12 +94,14 @@ export function HeroSection() {
         className="pointer-events-none absolute bottom-0 left-0 h-[280px] w-[360px] rounded-full bg-amber-500/10 blur-[110px]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         {/* Centered Hero Copy */}
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-700/20 bg-white/80 px-4 py-1.5 text-xs font-semibold text-emerald-800 shadow-sm backdrop-blur-md sm:text-sm">
-            <Sparkles className="h-3.5 w-3.5 text-amber-600" aria-hidden="true" />
-            <span>{siteConfig.aiBadge}</span>
+          <div className="mb-7 inline-flex items-center gap-2.5 text-xs font-semibold tracking-wide text-[#1b1b1b]/80 sm:text-sm">
+            
+            <span className="bg-gradient-to-r from-[#1b1b1b] via-emerald-900 to-[#1b1b1b] bg-clip-text font-semibold text-transparent">
+              {siteConfig.aiBadge}
+            </span>
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight text-[#1b1b1b] sm:text-5xl lg:text-6xl lg:leading-[1.08]">
@@ -137,7 +138,7 @@ export function HeroSection() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-[#1b1b1b]/70 sm:text-sm">
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-emerald-700" aria-hidden="true" />
-              7 İş Gününde Anahtar Teslim
+              7 İş Gününde Teslim
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Zap className="h-4 w-4 text-amber-600" aria-hidden="true" />
@@ -151,7 +152,7 @@ export function HeroSection() {
         </div>
 
         {/* Interactive Live Browser Dashboard Mockup */}
-        <div className="relative mx-auto mt-14 max-w-5xl">
+        <div className="relative mx-auto mt-14 max-w-[1320px]">
           {/* Realistic Browser Window */}
           <div className="overflow-hidden rounded-3xl border border-white/12 bg-slate-950/90 shadow-2xl shadow-black/70 ring-1 ring-white/5 backdrop-blur-xl">
             {/* Browser Top Chrome */}
