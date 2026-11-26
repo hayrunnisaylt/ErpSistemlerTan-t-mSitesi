@@ -19,10 +19,17 @@ import {
 import { siteConfig, type PortfolioItem } from "@/lib/site-config";
 
 const demoUrls: Record<PortfolioItem["id"], string> = {
-  toptanci: "app.yoltangida.com/ozet",
-  fizyoterapi: "klinik.fizyoterapi-erp.com/panel",
-  veteriner: "app.vetklinik-erp.com/klinik-ozeti",
-  atolye: "app.atolye-erp.com/aylik-gelir-gider",
+  toptanci: "erp.yoltangida.com.tr/ozet",
+  fizyoterapi: "panel.fizyovita.com.tr/klinik-ozeti",
+  veteriner: "klinik.pativet.com.tr/ozet",
+  atolye: "erp.zanaatatolye.com.tr/gelir-gider",
+};
+
+const demoBrands: Record<PortfolioItem["id"], string> = {
+  toptanci: "Yoltan Gıda A.Ş.",
+  fizyoterapi: "Fizyovita Klinik",
+  veteriner: "PatiVet & Çiftlik Polikliniği",
+  atolye: "Zanaat Tasarım Atölyesi",
 };
 
 const demoStepHints: Record<PortfolioItem["id"], string> = {
@@ -219,7 +226,7 @@ export function PortfolioShowcase() {
                 <div className="mt-3 flex items-start justify-between gap-3 px-1.5 pb-1">
                   <div className="min-w-0">
                     <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">
-                      {item.badge}
+                      {demoBrands[item.id]} • {item.badge}
                     </p>
                     <h3 className="truncate text-base font-bold text-[#1b1b1b]">
                       {item.title}

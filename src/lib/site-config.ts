@@ -51,7 +51,7 @@ export const siteConfig = {
   logoPath: "/logo.png",
   aiBadge: "Google Gemini 2.5 AI Destekli Yeni Nesil İşletme Sistemleri",
   heroTitle:
-    "Defteri, Karmaşık Excel'leri ve Saatler Süren Fatura Girişini Tarihe Gömdük.",
+    "Defteri, Karmaşık Excel'leri ve Saatler Süren Fatura Girişlerini Geride Bırakın.",
   heroSubtitle:
     "Toptancılardan veteriner kliniklerine, fizyoterapi merkezlerinden yerel işletmelere kadar; işinize özel kurgulanan, telefonunuzdan tek tıkla yönetilen yapay zeka destekli ERP ve Klinik Yönetim Sistemleri.",
   contact: {

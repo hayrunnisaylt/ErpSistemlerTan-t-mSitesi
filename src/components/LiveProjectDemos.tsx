@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
-  Activity,
   Calendar,
   CheckCircle2,
   ClipboardList,
@@ -21,6 +21,69 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
+
+/* ============================================================================
+   REAL CLIENT BRAND LOGOS (FROM UPLOADED LOGO PACK)
+============================================================================ */
+function BrandMarkYoltan() {
+  return (
+    <div className="flex w-full items-center gap-2 rounded-lg bg-[#4a4e69] px-2 py-1.5 shadow-2xs">
+      <Image
+        src="/project-logos/yg.png"
+        alt="Yoltan Gıda"
+        width={973}
+        height={365}
+        className="h-4 w-auto object-contain"
+      />
+      <div className="min-w-0 leading-tight">
+        <p className="truncate text-[9px] font-bold text-white">Yoltan Gıda</p>
+        <p className="truncate text-[7px] text-slate-200/80">Toptan ERP</p>
+      </div>
+    </div>
+  );
+}
+
+function BrandMarkFizyovita() {
+  return (
+    <div className="w-full rounded-lg bg-white px-2 py-1.5 shadow-sm">
+      <Image
+        src="/project-logos/fizyovita.png"
+        alt="FizyoVita Klinik"
+        width={1357}
+        height={344}
+        className="h-6 w-full object-contain"
+      />
+    </div>
+  );
+}
+
+function BrandMarkPativet() {
+  return (
+    <div className="flex w-full items-center justify-center rounded-lg bg-white px-2 py-1.5 shadow-sm">
+      <Image
+        src="/project-logos/pativet.png"
+        alt="PatiVet & Çiftlik Veteriner Kliniği"
+        width={1497}
+        height={1405}
+        className="h-10 w-auto object-contain"
+      />
+    </div>
+  );
+}
+
+function BrandMarkZanaat() {
+  return (
+    <div className="w-full rounded-lg bg-[#fff6ea] px-2 py-1.5 shadow-sm">
+      <Image
+        src="/project-logos/zanaat.png"
+        alt="Zanaat Atölye"
+        width={1092}
+        height={516}
+        className="h-8 w-full object-contain"
+      />
+    </div>
+  );
+}
 
 /* ============================================================================
    VIRTUAL ANIMATED CURSOR (Simulates real user clicking through the ERP)
@@ -108,16 +171,8 @@ export function ToptanciLiveDemo({ offsetMs = 0 }: { offsetMs?: number }) {
   return (
     <div className="relative flex h-full w-full overflow-hidden bg-[#f6f7f9] text-[#1b1b1b] select-none">
       {/* Left Sidebar (Yoltan Gıda white + burgundy style) */}
-      <aside className="flex w-[112px] shrink-0 flex-col border-r border-stone-200 bg-white p-2.5 sm:w-[130px]">
-        <div className="flex items-center gap-1.5">
-          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7c1d32] text-[10px] font-bold text-white">
-            Y
-          </span>
-          <div className="leading-tight">
-            <p className="text-[10px] font-bold text-stone-900">Yoltan Gıda</p>
-            <p className="text-[8px] text-stone-400">ERP SİSTEMİ</p>
-          </div>
-        </div>
+      <aside className="flex w-[112px] shrink-0 flex-col border-r border-stone-200 bg-white p-2.5 sm:w-[134px]">
+        <BrandMarkYoltan />
 
         <div className="mt-2.5 rounded-lg bg-[#7c1d32] px-2 py-1.5 text-center text-[9px] font-semibold text-white">
           + Yeni satış
@@ -417,18 +472,8 @@ export function FizyoterapiLiveDemo({ offsetMs = 900 }: { offsetMs?: number }) {
   return (
     <div className="relative flex h-full w-full overflow-hidden bg-[#f8faf9] text-[#1b1b1b] select-none">
       {/* Left Sidebar (Deep Teal matching user screenshot) */}
-      <aside className="flex w-[116px] shrink-0 flex-col bg-[#0c4a43] p-2.5 text-teal-100 sm:w-[134px]">
-        <div className="flex items-center gap-1.5">
-          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-500/20 text-emerald-300">
-            <Activity className="h-3.5 w-3.5" />
-          </span>
-          <div className="leading-tight">
-            <p className="text-[10px] font-bold text-white">Fizyoterapi ERP</p>
-            <p className="text-[7.5px] text-teal-300/80">
-              Klinik &amp; Manuel Terapi
-            </p>
-          </div>
-        </div>
+      <aside className="flex w-[116px] shrink-0 flex-col bg-[#0c4a43] p-2.5 text-teal-100 sm:w-[136px]">
+        <BrandMarkFizyovita />
 
         <ul className="mt-3 space-y-1 text-[9.5px]">
           {[
@@ -690,13 +735,8 @@ export function VeterinerLiveDemo({ offsetMs = 1800 }: { offsetMs?: number }) {
   return (
     <div className="relative flex h-full w-full overflow-hidden bg-[#f5f6f3] text-[#1b1b1b] select-none">
       {/* Left Sidebar (Deep forest green matching user's Veteriner ERP screenshot) */}
-      <aside className="flex w-[114px] shrink-0 flex-col bg-[#112219] p-2.5 text-stone-300 sm:w-[134px]">
-        <div className="flex items-center gap-1.5 pb-1">
-          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/10 text-emerald-300">
-            <PawPrint className="h-3.5 w-3.5" />
-          </span>
-          <p className="text-[10px] font-bold text-white">Veteriner ERP</p>
-        </div>
+      <aside className="flex w-[114px] shrink-0 flex-col bg-[#112219] p-2.5 text-stone-300 sm:w-[136px]">
+        <BrandMarkPativet />
 
         <div className="mt-2 space-y-2 text-[9px]">
           <div>
@@ -1058,13 +1098,8 @@ export function AtolyeLiveDemo({ offsetMs = 2400 }: { offsetMs?: number }) {
   return (
     <div className="relative flex h-full w-full overflow-hidden bg-[#f5f6fb] text-[#1b1b1b] select-none">
       {/* Left Sidebar (Deep Navy / Indigo matching user's Atölye ERP screenshot) */}
-      <aside className="flex w-[114px] shrink-0 flex-col bg-[#161728] p-2.5 text-slate-300 sm:w-[134px]">
-        <div className="flex items-center gap-1.5 pb-1">
-          <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#5b52d6] text-white">
-            <Layers className="h-3.5 w-3.5" />
-          </span>
-          <p className="text-[10px] font-bold text-white">Atölye ERP</p>
-        </div>
+      <aside className="flex w-[114px] shrink-0 flex-col bg-[#161728] p-2.5 text-slate-300 sm:w-[136px]">
+        <BrandMarkZanaat />
 
         <ul className="mt-3 space-y-1 text-[9px]">
           {[
