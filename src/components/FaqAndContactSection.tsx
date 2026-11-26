@@ -17,6 +17,7 @@ export const sectorOptions = [
   "Toptancı & Gıda / İçecek Dağıtım",
   "Veteriner Kliniği & Ecza / Petshop",
   "Fizyoterapi & Klinik Pilates",
+  "Atölye & Küçük İşletme ERP",
   ...siteConfig.sectorsData.map((s) => s.name),
   "Diğer Sektör / Özel Proje",
 ];
@@ -118,7 +119,7 @@ export function FaqAndContactSection({
         aria-labelledby="faq-heading"
         className="faq-accordion relative scroll-mt-20 border-b border-[#1b1b1b]/10 bg-[#eeede9] py-20 sm:py-28"
       >
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-10">
+        <div className="scroll-reveal mx-auto max-w-5xl px-4 sm:px-6 lg:px-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-emerald-700/60" aria-hidden="true" />
@@ -166,12 +167,7 @@ export function FaqAndContactSection({
         aria-labelledby="contact-heading"
         className="relative scroll-mt-20 overflow-hidden bg-[#eeede9] py-20 sm:py-28"
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 right-0 h-[360px] w-[520px] rounded-full bg-emerald-500/10 blur-[120px]"
-        />
-
-        <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
+        <div className="scroll-reveal relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
             {/* Left: Quick Contact Info & WhatsApp Card */}
             <div className="space-y-6 lg:col-span-5">

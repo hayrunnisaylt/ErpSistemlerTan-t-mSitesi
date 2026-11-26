@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -27,13 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="tr"
-      className={`${inter.className} ${inter.variable} scroll-smooth`}
-    >
-      <body
-        className={`${inter.className} min-h-screen bg-[#eeede9] font-sans text-[#1b1b1b] antialiased selection:bg-emerald-600/20 selection:text-[#1b1b1b]`}
-      >
+    <html lang="tr" className={`${geist.variable} scroll-smooth`}>
+      <body className="min-h-screen bg-[#eeede9] font-sans text-[#1b1b1b] antialiased selection:bg-emerald-600/20 selection:text-[#1b1b1b]">
         {children}
       </body>
     </html>

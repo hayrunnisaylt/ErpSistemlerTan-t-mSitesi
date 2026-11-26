@@ -1,4 +1,4 @@
-export type AccentTheme = "emerald" | "teal" | "amber";
+export type AccentTheme = "emerald" | "teal" | "amber" | "indigo";
 
 export interface PortfolioFeature {
   title: string;
@@ -6,7 +6,7 @@ export interface PortfolioFeature {
 }
 
 export interface PortfolioItem {
-  id: "toptanci" | "veteriner" | "fizyoterapi";
+  id: "toptanci" | "veteriner" | "fizyoterapi" | "atolye";
   tabLabel: string;
   shortLabel: string;
   badge: string;
@@ -186,6 +186,46 @@ export const siteConfig = {
         { label: "Paket Yenileme Artışı", value: "+%35", sub: "Son 2 seans uyarısıyla" },
         { label: "Randevu İptal Azalışı", value: "-%60", sub: "Otomatik hatırlatma" },
         { label: "Kasa & Taksit Hatası", value: "0", sub: "Tam otomatik cari" },
+      ],
+    },
+    {
+      id: "atolye",
+      tabLabel: "Atölye & Küçük İşletme ERP",
+      shortLabel: "Atölye ERP",
+      badge: "Sipariş, Malzeme & Gelir–Gider",
+      title: "Atölye & Küçük İşletme ERP Sistemi",
+      story:
+        "Özel üretim yapan atölye ve küçük işletmeler için siparişten malzeme stoğuna, aylık gelir–giderden müşteri takibine tüm akış tek ekranda.",
+      accent: "indigo",
+      demoUrl: "#iletisim",
+      demoButtonLabel: "Atölye ERP Canlı Demosunu İste",
+      screenshotUrl: undefined,
+      solvedProblems: [
+        "Siparişlerden gelen gelirlerle manuel harcamaların aylık net farkını görememe",
+        "Üretimde kullanılan hammadde ve malzemelerin kritik stok takibinin karışması",
+        "Hangi müşterinin siparişinin hangi aşamada ve ne kadar bakiyesi olduğunun unutulması",
+      ],
+      keyFeatures: [
+        {
+          title: "Aylık Gelir–Gider & Otomatik Sipariş Özeti",
+          description:
+            "Kayıtlı sipariş gelirlerini otomatik toplar; tek tıkla manuel gelir ve gider ekleyerek net aylık kârı anlık gösterir.",
+        },
+        {
+          title: "Malzeme & Hammadde Stok Yönetimi",
+          description:
+            "Ürün, malzeme ve stok giriş-çıkışlarını tek panelden yönetir; tükenen sarf malzemeleri önceden bildirir.",
+        },
+        {
+          title: "Müşteri & Sipariş Takip Panosu",
+          description:
+            "Her müşterinin geçmiş siparişlerini, teslim durumunu ve ödeme kayıtlarını sade bir arayüzde toplar.",
+        },
+      ],
+      metrics: [
+        { label: "Gelir–Gider Takibi", value: "Anlık", sub: "Sipariş + manuel akış" },
+        { label: "Malzeme Kontrolü", value: "%100", sub: "Otomatik stok düşümü" },
+        { label: "Kurulum Süresi", value: "5 Dk", sub: "Sıfır eğitim gereksinimi" },
       ],
     },
   ] as PortfolioItem[],

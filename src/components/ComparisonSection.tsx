@@ -25,7 +25,7 @@ export function ComparisonSection() {
 
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Old Way Card */}
-          <div className="rounded-3xl border border-rose-600/20 bg-white/75 p-6 shadow-sm sm:p-8">
+          <div className="scroll-reveal-card scroll-stagger-1 rounded-3xl border border-rose-600/20 bg-white/75 p-6 shadow-sm sm:p-8">
             <div className="border-b border-[#1b1b1b]/10 pb-5">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-600/10 px-3 py-1 text-xs font-semibold text-rose-700">
                 <XCircle className="h-3.5 w-3.5" aria-hidden="true" />
@@ -56,7 +56,7 @@ export function ComparisonSection() {
           </div>
 
           {/* New Way Card */}
-          <div className="relative overflow-hidden rounded-3xl border border-[#1b1b1b]/15 bg-[#1b1b1b] p-6 text-stone-100 shadow-2xl shadow-[#1b1b1b]/15 sm:p-8">
+          <div className="scroll-reveal-card scroll-stagger-2 relative overflow-hidden rounded-3xl border border-[#1b1b1b]/15 bg-[#1b1b1b] p-6 text-stone-100 shadow-2xl shadow-[#1b1b1b]/15 sm:p-8">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-500/20 blur-3xl"

@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  --font-mono: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, -apple-system, BlinkMacSystemFont,
+    var(--font-geist), Arial, sans-serif;
+  --font-mono: "Helvetica Neue", Helvetica, -apple-system, BlinkMacSystemFont,
+    var(--font-geist), Arial, sans-serif;
 }
 
 :root {
@@ -18,8 +18,8 @@
   body {
     background-color: #eeede9;
     color: #1b1b1b;
-    font-family: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
+    font-family: "Helvetica Neue", Helvetica, -apple-system, BlinkMacSystemFont,
+      var(--font-geist), Arial, sans-serif;
   }
 
   button,
@@ -33,7 +33,7 @@
   h2,
   h3,
   h4 {
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -139,4 +139,169 @@
 .nova-input {
   font-size: max(1rem, 1em);
   min-height: 48px;
+}
+
+/* ============================================================================
+   COOL SCROLL-DRIVEN ANIMATIONS (Native CSS View/Scroll Timelines + Fallback)
+============================================================================ */
+.scroll-progress-bar {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(90deg, #1b1b1b 0%, #059669 60%, #10b981 100%);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Native Scroll Progress Bar */
+  @supports (animation-timeline: scroll()) {
+    @keyframes grow-scroll-progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .scroll-progress-bar {
+      animation: grow-scroll-progress auto linear;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  /* Native View-Timeline Section & Card Reveals */
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes scroll-reveal-up {
+      from {
+        opacity: 0;
+        transform: translateY(64px) scale(0.94);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes scroll-hero-lift {
+      from {
+        transform: perspective(1200px) rotateX(7deg) translateY(32px) scale(0.94);
+      }
+      to {
+        transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+      }
+    }
+
+    .scroll-reveal {
+      animation: scroll-reveal-up auto linear backwards;
+      animation-timeline: view();
+      animation-range-start: entry 1%;
+      animation-range-end: cover 38%;
+    }
+
+    .scroll-reveal-card {
+      animation: scroll-reveal-up auto linear backwards;
+      animation-timeline: view();
+      animation-range-start: entry 1%;
+      animation-range-end: cover 38%;
+    }
+
+    .scroll-stagger-1 {
+      animation-range-start: entry 1%;
+      animation-range-end: cover 34%;
+    }
+
+    .scroll-stagger-2 {
+      animation-range-start: entry 8%;
+      animation-range-end: cover 42%;
+    }
+
+    .scroll-stagger-3 {
+      animation-range-start: entry 16%;
+      animation-range-end: cover 50%;
+    }
+
+    .scroll-hero-stage {
+      animation: scroll-hero-lift auto linear both;
+      animation-timeline: view();
+      animation-range-start: entry 1%;
+      animation-range-end: cover 45%;
+    }
+  }
+
+  /* Fallback classes for browsers without native view() timeline */
+  @supports not ((animation-timeline: view()) and (animation-range: entry)) {
+    .scroll-reveal,
+    .scroll-reveal-card {
+      opacity: 0;
+      transform: translateY(48px) scale(0.95);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .scroll-stagger-2 {
+      transition-delay: 90ms;
+    }
+
+    .scroll-stagger-3 {
+      transition-delay: 180ms;
+    }
+
+    .scroll-reveal.is-visible,
+    .scroll-reveal-card.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* ============================================================================
+   INFINITE MARQUEE PROJECT SHOWCASE STREAM
+============================================================================ */
+@keyframes marquee-stream {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-stream 56s linear infinite;
+  will-change: transform;
+}
+
+.marquee-viewport:hover .marquee-track,
+.marquee-viewport:focus-within .marquee-track,
+.marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes cursor-click-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.2);
+    opacity: 0;
+  }
+}
+
+.animate-cursor-ring {
+  animation: cursor-click-ring 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }

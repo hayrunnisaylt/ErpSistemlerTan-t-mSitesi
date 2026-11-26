@@ -42,14 +42,15 @@ export function WhyUsBento() {
 
         {/* 6-Card Bento Grid */}
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
-          {siteConfig.whyUsFeatures.map((item) => {
+          {siteConfig.whyUsFeatures.map((item, idx) => {
             const Icon = iconMap[item.id];
             const isFullWidth = item.id === "transparent-pricing";
+            const staggerClass = `scroll-stagger-${(idx % 3) + 1}`;
 
             return (
               <article
                 key={item.id}
-                className={`group relative overflow-hidden rounded-3xl border border-[#1b1b1b]/10 bg-white/80 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-700/35 hover:bg-white hover:shadow-lg hover:shadow-[#1b1b1b]/5 ${item.span}`}
+                className={`scroll-reveal-card ${staggerClass} group relative overflow-hidden rounded-3xl border border-[#1b1b1b]/10 bg-white/80 p-6 shadow-sm backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 hover:border-emerald-700/35 hover:bg-white hover:shadow-lg hover:shadow-[#1b1b1b]/5 ${item.span}`}
               >
                 <div
                   aria-hidden="true"

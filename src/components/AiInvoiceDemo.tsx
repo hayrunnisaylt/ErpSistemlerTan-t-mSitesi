@@ -78,12 +78,7 @@ export function AiInvoiceDemo() {
       id="yapay-zeka"
       className="relative scroll-mt-20 overflow-hidden border-b border-[#1b1b1b]/10 bg-[#eeede9] py-20 sm:py-28"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/8 blur-[120px]"
-      />
-
-      <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
+      <div className="scroll-reveal relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-800">

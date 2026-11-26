@@ -56,10 +56,11 @@ export function SectorsSection({ onSelectSector }: SectorsSectionProps) {
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {siteConfig.sectorsData.map((sector, idx) => {
             const Icon = sectorIcons[idx % sectorIcons.length];
+            const staggerClass = `scroll-stagger-${(idx % 3) + 1}`;
             return (
               <div
                 key={sector.name}
-                className="group flex flex-col justify-between rounded-3xl border border-[#1b1b1b]/10 bg-white/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-700/35 hover:bg-white hover:shadow-lg hover:shadow-[#1b1b1b]/5"
+                className={`scroll-reveal-card ${staggerClass} group flex flex-col justify-between rounded-3xl border border-[#1b1b1b]/10 bg-white/80 p-6 shadow-sm transition-[border-color,background-color,box-shadow] duration-300 hover:border-emerald-700/35 hover:bg-white hover:shadow-lg hover:shadow-[#1b1b1b]/5`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">

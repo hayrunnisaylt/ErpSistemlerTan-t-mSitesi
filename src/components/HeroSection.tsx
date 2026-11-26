@@ -79,20 +79,8 @@ export function HeroSection() {
       id="cozumler"
       className="relative overflow-hidden border-b border-[#1b1b1b]/10 bg-[#eeede9] pb-20 pt-14 sm:pb-28 sm:pt-20"
     >
-      {/* Subtle architectural grid & soft ambient washes */}
+      {/* Subtle architectural grid */}
       <div className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-70" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/2 h-[440px] w-[780px] -translate-x-1/2 rounded-full bg-emerald-500/12 blur-[120px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-40 h-[320px] w-[400px] rounded-full bg-teal-400/10 blur-[110px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 h-[280px] w-[360px] rounded-full bg-amber-500/10 blur-[110px]"
-      />
 
       <div className="relative mx-auto max-w-[1520px] px-4 sm:px-6 lg:px-10">
         {/* Centered Hero Copy */}
@@ -152,7 +140,7 @@ export function HeroSection() {
         </div>
 
         {/* Interactive Live Browser Dashboard Mockup */}
-        <div className="relative mx-auto mt-14 max-w-[1320px]">
+        <div className="scroll-hero-stage relative mx-auto mt-14 max-w-[1320px]">
           {/* Realistic Browser Window */}
           <div className="overflow-hidden rounded-3xl border border-white/12 bg-slate-950/90 shadow-2xl shadow-black/70 ring-1 ring-white/5 backdrop-blur-xl">
             {/* Browser Top Chrome */}
