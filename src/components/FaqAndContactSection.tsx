@@ -11,6 +11,7 @@ import {
   MapPin,
   Send,
 } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { siteConfig } from "@/lib/site-config";
 
 export const sectorOptions = [
@@ -230,6 +231,16 @@ export function FaqAndContactSection({
                     aria-hidden="true"
                   />
                   <span>{siteConfig.contact.email}</span>
+                </a>
+                <a
+                  href={siteConfig.social.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track-placement="İletişim Bölümü"
+                  className="flex items-center gap-3 font-medium transition-colors hover:text-pink-700"
+                >
+                  <InstagramIcon className="h-4 w-4 text-pink-600" />
+                  <span>{siteConfig.social.instagram.handle}</span>
                 </a>
                 <div className="flex items-center gap-3 text-[#1b1b1b]/70">
                   <MapPin

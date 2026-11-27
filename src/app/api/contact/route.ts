@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { recordContactSubmission } from "@/lib/analytics-store";
 import { siteConfig } from "@/lib/site-config";
 
 interface ContactPayload {
@@ -171,6 +172,55 @@ async function sendWithSmtp(params: {
   });
 }
 
+async function sendNotificationEmail(params: {
+  toEmail: string;
+  subject: string;
+  text: string;
+  html: string;
+}): Promise<"resend" | "smtp" | null> {
+  const { toEmail, subject, text, html } = params;
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const smtpHost = process.env.SMTP_HOST?.trim();
+  const smtpUser = process.env.SMTP_USER?.trim();
+  const smtpPass = process.env.SMTP_PASS?.trim();
+
+  if (resendApiKey) {
+    const fromEmail =
+      process.env.CONTACT_FROM_EMAIL?.trim() ||
+      `${siteConfig.brandName} <onboarding@resend.dev>`;
+    await sendWithResend({
+      apiKey: resendApiKey,
+      from: fromEmail,
+      to: toEmail,
+      subject,
+      text,
+      html,
+    });
+    return "resend";
+  }
+
+  if (smtpHost && smtpUser && smtpPass) {
+    const smtpPort = Number(process.env.SMTP_PORT || "465");
+    const fromEmail =
+      process.env.CONTACT_FROM_EMAIL?.trim() ||
+      `"${siteConfig.brandName}" <${smtpUser}>`;
+    await sendWithSmtp({
+      host: smtpHost,
+      port: Number.isNaN(smtpPort) ? 465 : smtpPort,
+      user: smtpUser,
+      pass: smtpPass,
+      from: fromEmail,
+      to: toEmail,
+      subject,
+      text,
+      html,
+    });
+    return "smtp";
+  }
+
+  return null;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const ip =
@@ -244,48 +294,29 @@ export async function POST(request: NextRequest) {
       message,
     });
 
-    const resendApiKey = process.env.RESEND_API_KEY?.trim();
-    const smtpHost = process.env.SMTP_HOST?.trim();
-    const smtpUser = process.env.SMTP_USER?.trim();
-    const smtpPass = process.env.SMTP_PASS?.trim();
-
-    if (resendApiKey) {
-      const fromEmail =
-        process.env.CONTACT_FROM_EMAIL?.trim() ||
-        `${siteConfig.brandName} <onboarding@resend.dev>`;
-
-      await sendWithResend({
-        apiKey: resendApiKey,
-        from: fromEmail,
-        to: toEmail,
-        subject,
-        text,
-        html,
-      });
-
-      return NextResponse.json({ ok: true, provider: "resend" });
+    let provider: "resend" | "smtp" | null = null;
+    let sendError: unknown = null;
+    try {
+      provider = await sendNotificationEmail({ toEmail, subject, text, html });
+    } catch (err) {
+      sendError = err;
     }
 
-    if (smtpHost && smtpUser && smtpPass) {
-      const smtpPort = Number(process.env.SMTP_PORT || "465");
-      const fromEmail =
-        process.env.CONTACT_FROM_EMAIL?.trim() ||
-        `"${siteConfig.brandName}" <${smtpUser}>`;
-
-      await sendWithSmtp({
-        host: smtpHost,
-        port: Number.isNaN(smtpPort) ? 465 : smtpPort,
-        user: smtpUser,
-        pass: smtpPass,
-        from: fromEmail,
-        to: toEmail,
-        subject,
-        text,
-        html,
+    // Admin paneli için başvuruyu kaydet (e-posta gitmese bile kaybolmasın)
+    try {
+      await recordContactSubmission({
+        fullName,
+        sector,
+        phone,
+        message,
+        emailDelivered: provider !== null,
       });
-
-      return NextResponse.json({ ok: true, provider: "smtp" });
+    } catch (err) {
+      console.error("[POST /api/contact] Başvuru kaydedilemedi:", err);
     }
+
+    if (sendError) throw sendError;
+    if (provider) return NextResponse.json({ ok: true, provider });
 
     console.error(
       "[POST /api/contact] E-posta sağlayıcısı yapılandırılmamış. RESEND_API_KEY veya SMTP_* ortam değişkenlerini ekleyin."

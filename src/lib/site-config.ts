@@ -59,6 +59,12 @@ export const siteConfig = {
     location: "Yalova & Tüm Türkiye",
     workingHours: "Pzt - Cmt: 09:00 - 20:00",
   },
+  social: {
+    instagram: {
+      handle: "@ynsoftwaresolution",
+      url: "https://www.instagram.com/ynsoftwaresolution/",
+    },
+  },
   navLinks: [
     { label: "Çözümlerimiz", href: "#cozumler" },
     { label: "Örnek Sistemler", href: "#vitrin" },

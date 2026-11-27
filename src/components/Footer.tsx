@@ -1,4 +1,5 @@
 import { BrandLogo } from "@/components/Navbar";
+import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
@@ -39,12 +40,24 @@ export function Footer() {
           <p>
             © {year} {siteConfig.brandName}. Tüm hakları saklıdır.
           </p>
-          <a
-            href={`mailto:${siteConfig.contact.email}`}
-            className="transition-colors hover:text-[#1b1b1b]"
-          >
-            {siteConfig.contact.email}
-          </a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a
+              href={siteConfig.social.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-placement="Alt Bilgi (Footer)"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-pink-700"
+            >
+              <InstagramIcon className="h-3.5 w-3.5" />
+              {siteConfig.social.instagram.handle}
+            </a>
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              className="transition-colors hover:text-[#1b1b1b]"
+            >
+              {siteConfig.contact.email}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

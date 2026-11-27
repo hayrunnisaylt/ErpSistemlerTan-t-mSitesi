@@ -12,6 +12,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { Navbar } from "@/components/Navbar";
 import { PortfolioShowcase } from "@/components/PortfolioShowcase";
 import { SectorsSection } from "@/components/SectorsSection";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { WhyUsBento } from "@/components/WhyUsBento";
 
 export function LandingPageClient() {
@@ -88,6 +89,7 @@ export function LandingPageClient() {
         aria-hidden="true"
         className="scroll-progress-bar"
       />
+      <SiteAnalytics />
       <Navbar />
       <main className="flex-1">
         <HeroSection />

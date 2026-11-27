@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Mail, Menu, Sparkles, X } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { siteConfig } from "@/lib/site-config";
 
 interface BrandLogoProps {
@@ -57,6 +58,17 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2.5 sm:flex">
             <a
+              href={siteConfig.social.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-placement="Üst Menü"
+              aria-label={`Instagram: ${siteConfig.social.instagram.handle}`}
+              title={siteConfig.social.instagram.handle}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[#1b1b1b]/15 bg-white/70 text-[#1b1b1b] transition-all duration-200 hover:border-pink-500/40 hover:bg-pink-500/10 hover:text-pink-700"
+            >
+              <InstagramIcon className="h-4.5 w-4.5" />
+            </a>
+            <a
               href={`mailto:${siteConfig.contact.email}`}
               className="inline-flex items-center gap-1.5 rounded-xl border border-[#1b1b1b]/15 bg-white/70 px-3.5 py-2 text-sm font-medium text-[#1b1b1b] transition-all duration-200 hover:border-emerald-600/40 hover:bg-emerald-600/10 hover:text-emerald-900"
             >
@@ -109,6 +121,17 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:hidden">
+            <a
+              href={siteConfig.social.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-placement="Mobil Menü"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#1b1b1b]/15 bg-white/80 px-4 py-3 text-sm font-medium text-[#1b1b1b]"
+            >
+              <InstagramIcon className="h-4 w-4 text-pink-600" />
+              Instagram&apos;da Takip Edin
+            </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
               onClick={() => setMobileOpen(false)}
