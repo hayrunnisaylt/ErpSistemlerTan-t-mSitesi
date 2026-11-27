@@ -16,6 +16,7 @@ import {
   ToptanciLiveDemo,
   VeterinerLiveDemo,
 } from "@/components/LiveProjectDemos";
+import { ScaledFrame } from "@/components/ScaledFrame";
 import { siteConfig, type PortfolioItem } from "@/lib/site-config";
 
 const demoUrls: Record<PortfolioItem["id"], string> = {
@@ -109,9 +110,17 @@ export function PortfolioShowcase() {
             Aşağıdaki canlı proje akışı bir video gibi kendi içinde satış girer,
             randevu oluşturur ve stok işler.{" "}
             <strong className="font-semibold text-[#1b1b1b]">
-              Herhangi bir pencerenin üzerine gelin:
+              <span className="pointer-coarse:hidden">
+                Herhangi bir pencerenin üzerine gelin:
+              </span>
+              <span className="hidden pointer-coarse:inline">Herhangi bir pencereye dokunun:</span>
             </strong>{" "}
-            akış durur ve o proje büyüyerek detaylı görünür.
+            <span className="pointer-coarse:hidden">
+              akış durur ve o proje büyüyerek detaylı görünür.
+            </span>
+            <span className="hidden pointer-coarse:inline">
+              o proje büyüyerek tüm detaylarıyla açılır.
+            </span>
           </p>
 
           {/* Stream Status & Pause/Play Control */}
@@ -181,25 +190,25 @@ export function PortfolioShowcase() {
                 onClick={() => setExpandedItem(item)}
                 className={`group relative w-[86vw] max-w-[600px] shrink-0 cursor-pointer rounded-3xl border bg-white/95 p-3 shadow-xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:w-[540px] lg:w-[600px] ${
                   isHovered
-                    ? "z-30 scale-[1.09] border-emerald-700/45 shadow-2xl shadow-[#1b1b1b]/20 ring-4 ring-emerald-600/15"
+                    ? "z-30 border-emerald-700/45 pointer-fine:scale-[1.09] shadow-2xl shadow-[#1b1b1b]/20 ring-4 ring-emerald-600/15"
                     : someHovered
-                    ? "scale-[0.97] border-[#1b1b1b]/10 opacity-70"
+                    ? "border-[#1b1b1b]/10 opacity-70 pointer-fine:scale-[0.97]"
                     : "border-[#1b1b1b]/12 shadow-[#1b1b1b]/8"
                 }`}
               >
                 {/* Realistic Browser Chrome */}
-                <div className="flex items-center justify-between rounded-t-2xl border-b border-stone-200 bg-stone-100/90 px-3.5 py-2.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    <span className="ml-2 rounded-md bg-white px-2 py-0.5 font-mono text-[10px] text-stone-500 shadow-2xs">
+                <div className="flex items-center justify-between gap-2 rounded-t-2xl border-b border-stone-200 bg-stone-100/90 px-3.5 py-2.5">
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-rose-400" />
+                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-amber-400" />
+                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500" />
+                    <span className="ml-2 truncate rounded-md bg-white px-2 py-0.5 font-mono text-[10px] text-stone-500 shadow-2xs">
                       {demoUrls[item.id]}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-800">
+                    <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-emerald-600/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-800">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       Canlı Akış
                     </span>
@@ -218,9 +227,13 @@ export function PortfolioShowcase() {
                 </div>
 
                 {/* Live Animated Project Window */}
-                <div className="h-[310px] overflow-hidden rounded-b-2xl border-x border-b border-stone-200 sm:h-[340px]">
+                <ScaledFrame
+                  designWidth={520}
+                  designHeight={340}
+                  className="rounded-b-2xl border-x border-b border-stone-200"
+                >
                   {renderLiveDemo(item.id, offsetMs)}
-                </div>
+                </ScaledFrame>
 
                 {/* Project Caption & Hover Detail Drawer */}
                 <div className="mt-3 flex items-start justify-between gap-3 px-1.5 pb-1">
@@ -301,11 +314,11 @@ export function PortfolioShowcase() {
           aria-modal="true"
           aria-labelledby="spotlight-title"
           onClick={() => setExpandedItem(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 p-4 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 p-3 backdrop-blur-sm sm:p-6"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[92vh] w-full max-w-6xl overflow-y-auto rounded-3xl border border-[#1b1b1b]/15 bg-[#eeede9] p-5 shadow-2xl sm:p-7"
+            className="max-h-[92dvh] w-full max-w-6xl overflow-y-auto overscroll-contain rounded-3xl border border-[#1b1b1b]/15 bg-[#eeede9] p-4 shadow-2xl sm:p-7"
           >
             <div className="flex items-start justify-between gap-4 border-b border-[#1b1b1b]/10 pb-4">
               <div>
@@ -314,7 +327,7 @@ export function PortfolioShowcase() {
                 </p>
                 <h3
                   id="spotlight-title"
-                  className="mt-1 text-2xl font-bold text-[#1b1b1b]"
+                  className="mt-1 text-xl font-bold text-[#1b1b1b] sm:text-2xl"
                 >
                   {expandedItem.title}
                 </h3>
@@ -333,22 +346,22 @@ export function PortfolioShowcase() {
               {/* Large Live Demo Window */}
               <div className="lg:col-span-7">
                 <div className="overflow-hidden rounded-2xl border border-[#1b1b1b]/15 bg-white shadow-xl">
-                  <div className="flex items-center justify-between border-b border-stone-200 bg-stone-100 px-4 py-2.5">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                      <span className="ml-2 font-mono text-xs text-stone-500">
+                  <div className="flex items-center justify-between gap-2 border-b border-stone-200 bg-stone-100 px-4 py-2.5">
+                    <div className="flex min-w-0 items-center gap-1.5">
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-rose-400" />
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-amber-400" />
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500" />
+                      <span className="ml-2 truncate font-mono text-xs text-stone-500">
                         {demoUrls[expandedItem.id]}
                       </span>
                     </div>
-                    <span className="rounded-full bg-emerald-600/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-800">
+                    <span className="shrink-0 whitespace-nowrap rounded-full bg-emerald-600/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-800">
                       Canlı Video Simülasyonu
                     </span>
                   </div>
-                  <div className="h-[360px] sm:h-[420px]">
+                  <ScaledFrame designWidth={560} designHeight={420}>
                     {renderLiveDemo(expandedItem.id, 0)}
-                  </div>
+                  </ScaledFrame>
                 </div>
               </div>
 

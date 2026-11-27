@@ -91,7 +91,8 @@ export function AiInvoiceDemo() {
             <span className="text-emerald-700">Şimdi Kendiniz Test Edin</span>
           </h2>
           <p className="mt-4 text-base text-[#1b1b1b]/70 sm:text-lg">
-            Soldaki karmaşık e-Arşiv faturayı yapay zekaya taratın; 1.5 saniyede
+            <span className="hidden lg:inline">Soldaki</span>
+            <span className="lg:hidden">Aşağıdaki</span> karmaşık e-Arşiv faturayı yapay zekaya taratın; 1.5 saniyede
             tedarikçi, KDV dahil birim maliyet ve stok eşleşmelerinin nasıl
             otomatik oluştuğunu görün.
           </p>
@@ -268,7 +269,8 @@ export function AiInvoiceDemo() {
                     Fatura taranmayı bekliyor
                   </p>
                   <p className="mt-1.5 max-w-sm text-sm text-stone-400">
-                    Soldaki{" "}
+                    <span className="hidden lg:inline">Soldaki</span>
+                    <span className="lg:hidden">Yukarıdaki</span>{" "}
                     <strong className="text-emerald-300">
                       &ldquo;Yapay Zeka İle Faturayı Tara&rdquo;
                     </strong>{" "}
